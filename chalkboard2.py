@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands
 import datetime
 import asyncio
+import os
+
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="?", intents=intents)
@@ -148,14 +150,14 @@ async def undeafen(ctx, member: discord.Member):
     await ctx.send(f"Undeafened {member}.")
 
 # MODLOGS (user)
+# MODLOGS (user)
 @bot.command(name="modlogs")
 async def modlogs_cmd(ctx, member: discord.Member):
     logs = [c for c in modlogs.get(ctx.guild.id, []) if c["user"] == member.id]
     if not logs:
         return await ctx.send("No logs.")
 
-    msg = "
-".join([f"Case {c['case']} — {c['action']}: {c['reason']}" for c in logs])
+    msg = "\n".join([f"Case {c['case']} — {c['action']}: {c['reason']}" for c in logs])
     await ctx.send(msg)
 
 # CASE lookup
@@ -248,5 +250,6 @@ async def on_ready():
 bot.run(os.getenv("BOT_TOKEN"))
 
 # END OF MODERATION-ONLY BOT
+
 
 
