@@ -209,13 +209,13 @@ async def note(ctx, member: discord.Member, *, text):
     await ctx.send(f"Added note for {member}.")
 
 # NOTES: list
+# NOTES: list
 @bot.command()
 async def notes_cmd(ctx, member: discord.Member):
     user_notes = notes.get(ctx.guild.id, {}).get(member.id, [])
     if not user_notes:
         return await ctx.send("No notes.")
-    msg = "
-".join([f"{i+1}. {n}" for i,n in enumerate(user_notes)])
+    msg = "\n".join([f"{i+1}. {n}" for i,n in enumerate(user_notes)])
     await ctx.send(msg)
 
 # NOTES: delnote
@@ -234,13 +234,13 @@ async def clearnotes(ctx, member: discord.Member):
     await ctx.send("Cleared notes.")
 
 # MEMBER LIST BY ROLE
+# MEMBER LIST BY ROLE
 @bot.command()
 async def members(ctx, role: discord.Role):
     m = [str(u) for u in role.members]
     if not m:
         return await ctx.send("No members in that role.")
-    await ctx.send("
-".join(m))
+    await ctx.send("\n".join(m))
 
 # ------------------ EVENTS ------------------
 @bot.event
@@ -250,6 +250,7 @@ async def on_ready():
 bot.run(os.getenv("BOT_TOKEN"))
 
 # END OF MODERATION-ONLY BOT
+
 
 
 
