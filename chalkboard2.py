@@ -119,8 +119,7 @@ async def warnings(ctx, member: discord.Member):
     if not data:
         return await ctx.send("No warnings.")
 
-    msg = "
-".join([f"Case {c['case']}: {c['reason']}" for c in data])
+    msg = "\n".join([f"Case {c['case']}: {c['reason']}" for c in data])
     await ctx.send(msg)
 
 # SOFTBAN
@@ -249,4 +248,5 @@ async def on_ready():
 bot.run(os.getenv("BOT_TOKEN"))
 
 # END OF MODERATION-ONLY BOT
+
 
