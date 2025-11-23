@@ -1,11 +1,10 @@
-#chalkboard mod bot
+# chalkboard mod bot
 
 import discord
 from discord.ext import commands
 import datetime
 import asyncio
 import os
-
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="?", intents=intents)
@@ -150,7 +149,6 @@ async def undeafen(ctx, member: discord.Member):
     await ctx.send(f"Undeafened {member}.")
 
 # MODLOGS (user)
-# MODLOGS (user)
 @bot.command(name="modlogs")
 async def modlogs_cmd(ctx, member: discord.Member):
     logs = [c for c in modlogs.get(ctx.guild.id, []) if c["user"] == member.id]
@@ -209,7 +207,6 @@ async def note(ctx, member: discord.Member, *, text):
     await ctx.send(f"Added note for {member}.")
 
 # NOTES: list
-# NOTES: list
 @bot.command()
 async def notes_cmd(ctx, member: discord.Member):
     user_notes = notes.get(ctx.guild.id, {}).get(member.id, [])
@@ -234,7 +231,6 @@ async def clearnotes(ctx, member: discord.Member):
     await ctx.send("Cleared notes.")
 
 # MEMBER LIST BY ROLE
-# MEMBER LIST BY ROLE
 @bot.command()
 async def members(ctx, role: discord.Role):
     m = [str(u) for u in role.members]
@@ -246,27 +242,11 @@ async def members(ctx, role: discord.Role):
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
-    try:
-        # Force sync commands globally
-        synced = await tree.sync()
-        print(f"Synced {len(synced)} command(s)")
-    except Exception as e:
-        print(f"Failed to sync commands: {e}")
-    
-    if not check_endings.is_running():
-        check_endings.start()
 
-# This should be OUTSIDE and at the same level as @bot.event
+# ------------------ RUN BOT ------------------
 if __name__ == "__main__":
     TOKEN = os.getenv("BOT_TOKEN")
     if not TOKEN:
         print("Please set BOT_TOKEN environment variable and restart.")
     else:
         bot.run(TOKEN)
-
-# END OF MODERATION-ONLY BOT
-
-
-
-
-
