@@ -246,4 +246,7 @@ async def members(ctx, role: discord.Role):
 async def on_ready():
     print(f"Logged in as {bot.user}")
 
+bot.run(os.getenv("BOT_TOKEN"))
+
 # END OF MODERATION-ONLY BOT
+
